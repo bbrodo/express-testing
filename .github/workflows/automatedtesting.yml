@@ -7,3 +7,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "Hello World"
+      - name: Checkout
+        uses: actions/checkout@v4.2.1
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4.0.4
+        with:
+          node-version: 'latest'
+
+      - name: Install dependencies for project
+        run: npm install
+
+      - name: run the tests
+        run: npm run test
+
