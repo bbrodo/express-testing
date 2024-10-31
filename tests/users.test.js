@@ -2,8 +2,16 @@ const { app } = require("../src/server.js");
 const request = require("supertest");
 
 describe("users controller", () => { 
-    test.skip('get all users route returns array of users', async () => {
+    test('get all users route returns array of users', async () => {
         const response = await request(app).get("/users")
+
+        expect(response.body.data.length).toBe(6)
+
+        let expectedUsers = [
+            "xander", "tom", "hanna", "reece", "brad", "hayden"
+        ]
+
+        expect(response.body.data).toEqual(expect.arrayContaining(expectedUsers))
     })
     test.skip('get by id route returns single user as object', async () => {
         let targetUserId = "12345"

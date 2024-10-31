@@ -8,6 +8,9 @@ app.get("/", (request, response) => {
   });
 });
 
+const UserController = require("./Controllers/UserController.js");
+app.use("/users", UserController);
+
 module.exports = {
-    app
-}
+  app,
+};
