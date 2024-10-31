@@ -9,13 +9,24 @@ router.get("/", (request, response) => {
 });
 
 router.post("/signup", async (request, response) => {
-    let recievedUserData = request.body
+  let recievedUserData = request.body;
 
-    recievedUserData.password = "EncryptedPassword"
+  recievedUserData.password = "EncryptedPassword";
 
-    let placeholderDatabaseResult = {...recievedUserData}
+  let placeholderDatabaseResult = { ...recievedUserData };
 
-    response.json(placeholderDatabaseResult)
-})
+  response.json(placeholderDatabaseResult);
+});
+
+router.get("/:userid", async (request, response) => {
+  let targetUserId = request.params.userid;
+
+  response.json({
+    result: {
+      id: targetUserId,
+      username: "Pretend this username is from the database",
+    },
+  });
+});
 
 module.exports = router;
