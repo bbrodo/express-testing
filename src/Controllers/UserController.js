@@ -8,4 +8,14 @@ router.get("/", (request, response) => {
   });
 });
 
+router.post("/signup", async (request, response) => {
+    let recievedUserData = request.body
+
+    recievedUserData.password = "EncryptedPassword"
+
+    let placeholderDatabaseResult = {...recievedUserData}
+
+    response.json(placeholderDatabaseResult)
+})
+
 module.exports = router;
