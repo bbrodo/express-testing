@@ -29,11 +29,24 @@ describe("users controller", () => {
     expect(response.body.username).toBe("jason");
     expect(response.body.password).toBe("EncryptedPassword");
   });
-  test.skip("user login route returns single user as object", async () => {
-    const response = await request(app).post("/users/login").send({
-      username: "jason",
-      password: "pass",
-    });
+  test("user login route returns single user as object", async () => {
+    const response = await request(app)
+      .post("/users/login")
+      .set("Authorization", "Example string for header value");
+
+    expect(response.body.authHeaderData).toBe(
+      "Example string for header value"
+    );
+  });
+
+  test("User login route throws an error on invalid login data", async () => {
+    const response = await request(app)
+      .post("/users/login")
+      .set("Authorization", "this should cause an error");
+
+    expect(response.body.authHeaderData).toBeUndefined();
+    expect(response.body.status).toBe(500)
+    expect(response.body.error).toBe("Not valid login data")
   });
   test.skip("user update route returns single user as object", async () => {
     const response = await request(app).patch("/users/12345").send({
